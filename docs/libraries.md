@@ -1,0 +1,2 @@
+- UI Library: https://callstack.github.io/react-native-paper/getting-started.html
+- Navigation: https://reactnavigation.org/docs/getting-started
