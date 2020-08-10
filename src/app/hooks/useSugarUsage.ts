@@ -1,34 +1,38 @@
-import { useMemo } from 'react';
-import { sugarUsage } from '../../state/atoms/sugarUsage';
-import { createSugarUsageService } from '../services/sugarUsage/sugarUsageService';
+import { useMemo, useState } from 'react';
+import { SugarUsageService } from '../services/sugarUsage/SugarUsageService';
 import { useAsyncStorageContext } from '../../providers/AsyncStorageProvider';
-import { useRecoilState } from 'recoil';
 
 const sugarUsageLimitPerWeek = 175;
 
 export const useSugarUsage = () => {
   const { storage } = useAsyncStorageContext();
-  const service = createSugarUsageService(sugarUsageLimitPerWeek, storage);
+  const [sugarUsageValue, setSugarUsage] = useState(0);
+  const [percentUsage, setPercentUsage] = useState(0);
+  const [hasExceeded, setHasExceeded] = useState(false);
+  const [remainingUsage, setRemainingUsage] = useState(0);
 
-  const [sugarUsageValue, setSugarUsage] = useRecoilState(sugarUsage);
-  service.onChange(setSugarUsage);
-
-  const percentUsage = useMemo(() => service.getSugarUsageInPercentage(), [
-    service,
-  ]);
-
-  const hasExceeded = useMemo(() => service.hasExceededSugarUsageLimit(), [
-    service,
-  ]);
-
-  const remainingUsage = useMemo(() => service.getRemainingUsage(), [service]);
+  const service = useMemo(
+    () =>
+      new SugarUsageService({
+        limitPerWeek: sugarUsageLimitPerWeek,
+        storage,
+        onChange: (usage, sugarService) => {
+          setSugarUsage(usage);
+          setHasExceeded(sugarService.hasExceededSugarUsageLimit);
+          setPercentUsage(sugarService.sugarUsageInPercentage);
+          setRemainingUsage(sugarService.remainingUsage);
+        },
+      }),
+    [storage],
+  );
 
   return {
     sugarUsage: sugarUsageValue,
     percentUsage,
-    addUsage: service.addUsage,
+    addUsage: service.addUsage.bind(service),
     hasExceeded,
     remainingUsage,
     unit: service.unit,
+    reset: service.reset.bind(service),
   };
 };

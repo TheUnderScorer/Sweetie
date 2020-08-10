@@ -1,15 +1,18 @@
 import React, { FC, useMemo } from 'react';
 import { CenteredSafeArea } from '../../ui/atoms/styles/view';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { Button, Subheading, Title, useTheme } from 'react-native-paper';
-import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import { IconButton, useTheme } from 'react-native-paper';
+import { StyleSheet, useWindowDimensions } from 'react-native';
 import { useSugarUsage } from '../hooks/useSugarUsage';
+import { AddSugarUsage } from '../addSugarUsageBtn/AddSugarUsage';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { SugarUsageDetails } from './sugarUsageDetails/SugarUsageDetails';
 
 export interface SugarUsageProps {}
 
 const styles = StyleSheet.create({
-  text: {
-    textAlign: 'center',
+  addSugarBtn: {
+    marginTop: 50,
   },
 });
 
@@ -27,6 +30,8 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
     sugarUsage,
     unit,
     remainingUsage,
+    addUsage,
+    reset,
   } = useSugarUsage();
 
   return (
@@ -38,19 +43,18 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
         tintColor={hasExceeded ? error : primary}
         backgroundColor={surface}>
         {() => (
-          <View>
-            <Title style={styles.text}>
-              Current usage: {sugarUsage}
-              {unit}
-            </Title>
-            <Subheading style={styles.text}>
-              Left: {remainingUsage}
-              {unit}
-            </Subheading>
-          </View>
+          <SugarUsageDetails
+            sugarUsage={sugarUsage}
+            unit={unit}
+            remainingUsage={remainingUsage}
+          />
         )}
       </AnimatedCircularProgress>
-      <Button mode="outlined">+</Button>
+      <AddSugarUsage onAdd={addUsage} style={styles.addSugarBtn} />
+      <IconButton
+        onPress={reset}
+        icon={(props) => <MaterialIcon {...props} name="refresh" />}
+      />
     </CenteredSafeArea>
   );
 };
