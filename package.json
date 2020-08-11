@@ -65,8 +65,12 @@
       "@testing-library/jest-native/extend-expect"
     ],
     "setupFiles": [
-      "<rootDir>/src/setupTests.ts"
+      "<rootDir>/src/setupTests.ts",
+      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
     ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/fileMock.js"
+    },
     "moduleFileExtensions": [
       "ts",
       "tsx",
