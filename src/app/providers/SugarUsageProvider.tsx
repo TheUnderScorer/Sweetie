@@ -1,4 +1,11 @@
-import React, { createContext, FC, useContext, useMemo, useState } from 'react';
+import React, {
+  createContext,
+  FC,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import { useAsyncStorageContext } from './AsyncStorageProvider';
 import { SugarUsage } from '../services/sugarUsage/types';
 import { SugarUsageService } from '../services/sugarUsage/SugarUsageService';
@@ -20,6 +27,7 @@ const defaultValue: SugarUsageContextType = {
   unit: '',
   usages: [],
   restoreLastItem: () => Promise.resolve(false),
+  remainingUsagePerDay: 0,
 };
 
 export interface SugarUsageContextType {
@@ -33,6 +41,7 @@ export interface SugarUsageContextType {
   reset: () => Promise<void>;
   usages: SugarUsage[];
   restoreLastItem: () => Promise<boolean>;
+  remainingUsagePerDay: number;
 }
 
 const SugarUsageContext = createContext<SugarUsageContextType>(defaultValue);
@@ -47,19 +56,26 @@ const SugarUsageProvider: FC = ({ children }) => {
   const [percentUsage, setPercentUsage] = useState(0);
   const [hasExceeded, setHasExceeded] = useState(false);
   const [remainingUsage, setRemainingUsage] = useState(0);
+  const [remainingUsagePerDay, setRemainingUsagePerDay] = useState(0);
+
+  const onChange = useCallback(
+    (usage: number, sugarService: SugarUsageService) => {
+      setSugarUsage(usage);
+      setHasExceeded(sugarService.hasExceededSugarUsageLimit);
+      setPercentUsage(sugarService.sugarUsageInPercentage);
+      setRemainingUsage(sugarService.remainingUsage);
+      setUsages(sugarService.usages);
+      setRemainingUsagePerDay(sugarService.remainingUsagePerDay);
+    },
+    [],
+  );
 
   const service = useMemo(
     () =>
       new SugarUsageService({
         limitPerWeek: sugarUsageLimitPerWeek,
         storage,
-        onChange: (usage, sugarService) => {
-          setSugarUsage(usage);
-          setHasExceeded(sugarService.hasExceededSugarUsageLimit);
-          setPercentUsage(sugarService.sugarUsageInPercentage);
-          setRemainingUsage(sugarService.remainingUsage);
-          setUsages(service.usages);
-        },
+        onChange,
       }),
     [storage, setUsages],
   );
@@ -76,11 +92,13 @@ const SugarUsageProvider: FC = ({ children }) => {
       reset: service.reset.bind(service),
       restoreLastItem: service.restoreLastItem.bind(service),
       usages,
+      remainingUsagePerDay,
     }),
     [
       hasExceeded,
       percentUsage,
       remainingUsage,
+      remainingUsagePerDay,
       service,
       sugarUsageValue,
       usages,

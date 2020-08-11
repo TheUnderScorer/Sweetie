@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { CenteredSafeArea } from '../../ui/atoms/styles/view';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { useTheme } from 'react-native-paper';
+import { Surface, useTheme } from 'react-native-paper';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { AddSugarUsage } from '../addSugarUsageBtn/AddSugarUsage';
 import { SugarUsageDetails } from './sugarUsageDetails/SugarUsageDetails';
@@ -13,12 +13,13 @@ const styles = StyleSheet.create({
   addSugarBtn: {
     marginTop: 50,
   },
+  container: {
+    flex: 1,
+  },
 });
 
 export const SugarUsage: FC<SugarUsageProps> = () => {
-  const {
-    colors: { primary, surface, error },
-  } = useTheme();
+  const theme = useTheme();
 
   const dimensions = useWindowDimensions();
   const size = useMemo(() => dimensions.width / 1.2, [dimensions]);
@@ -29,25 +30,29 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
     sugarUsage,
     unit,
     remainingUsage,
+    remainingUsagePerDay,
   } = useSugarUsageContext();
 
   return (
-    <CenteredSafeArea>
-      <AnimatedCircularProgress
-        fill={percentUsage}
-        size={size}
-        width={30}
-        tintColor={hasExceeded ? error : primary}
-        backgroundColor={surface}>
-        {() => (
-          <SugarUsageDetails
-            sugarUsage={sugarUsage}
-            unit={unit}
-            remainingUsage={remainingUsage}
-          />
-        )}
-      </AnimatedCircularProgress>
-      <AddSugarUsage style={styles.addSugarBtn} />
-    </CenteredSafeArea>
+    <Surface style={styles.container}>
+      <CenteredSafeArea>
+        <AnimatedCircularProgress
+          fill={percentUsage}
+          size={size}
+          width={30}
+          tintColor={hasExceeded ? theme.colors.error : theme.colors.primary}
+          backgroundColor={theme.colors.backdrop}>
+          {() => (
+            <SugarUsageDetails
+              sugarUsage={sugarUsage}
+              unit={unit}
+              remainingUsage={remainingUsage}
+              sugarUsagePerDay={remainingUsagePerDay}
+            />
+          )}
+        </AnimatedCircularProgress>
+        <AddSugarUsage style={styles.addSugarBtn} />
+      </CenteredSafeArea>
+    </Surface>
   );
 };

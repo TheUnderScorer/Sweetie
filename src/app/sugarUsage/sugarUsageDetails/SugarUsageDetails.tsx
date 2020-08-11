@@ -1,12 +1,20 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import { SugarImg } from './sugarImg/SugarImg';
-import { IconButton, Subheading, Title } from 'react-native-paper';
+import {
+  IconButton,
+  Subheading,
+  Title,
+  Divider,
+  useTheme,
+} from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { LayoutAnimation, StyleSheet, View } from 'react-native';
 import useBooleanToggle from '../../../hooks/useBooleanToggle';
+import { getRemainingDaysInWeek } from '../../../utils/date';
 
 export interface SugarUsageDetailsProps {
   sugarUsage: number;
+  sugarUsagePerDay: number;
   unit: string;
   remainingUsage: number;
 }
@@ -29,10 +37,14 @@ const styles = StyleSheet.create({
 
 export const SugarUsageDetails: FC<SugarUsageDetailsProps> = ({
   remainingUsage,
+  sugarUsagePerDay,
   sugarUsage,
   unit,
 }) => {
+  const theme = useTheme();
+
   const [viewDetails, toggleViewDetails] = useBooleanToggle(false);
+  const remainingDays = useMemo(() => getRemainingDaysInWeek(), []);
 
   const handleToggle = useCallback(() => {
     LayoutAnimation.configureNext({
@@ -49,12 +61,26 @@ export const SugarUsageDetails: FC<SugarUsageDetailsProps> = ({
       {viewDetails && (
         <>
           <Title style={styles.text}>
-            Current usage: {sugarUsage}
-            {unit}
+            Current usage:{' '}
+            <Title
+              style={{
+                color: remainingUsage ? theme.colors.text : theme.colors.error,
+              }}>
+              {sugarUsage}
+              {unit}
+            </Title>
           </Title>
           <Subheading style={styles.text}>
             Left: {remainingUsage}
             {unit}
+          </Subheading>
+
+          <Subheading style={styles.text}>
+            Left per day: {sugarUsagePerDay}
+            {unit}
+          </Subheading>
+          <Subheading style={styles.text}>
+            Remaining days: {remainingDays}
           </Subheading>
         </>
       )}

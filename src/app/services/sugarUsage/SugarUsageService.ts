@@ -1,6 +1,7 @@
 import { percent, sum } from '../../../utils/math';
 import { AsyncStore } from '../../../storage/AsyncStore';
 import { SugarUsage } from './types';
+import { getRemainingDaysInWeek } from '../../../utils/date';
 
 const key = 'sugarUsages1';
 
@@ -38,19 +39,24 @@ export class SugarUsageService {
   }
 
   get hasExceededSugarUsageLimit() {
-    return this.getCurrentUsage() >= this.limitPerWeek;
+    return this.currentUsage >= this.limitPerWeek;
   }
 
   get remainingUsage() {
-    let remain = this.limitPerWeek - this.getCurrentUsage();
+    const remain = this.limitPerWeek - this.currentUsage;
+
     return remain < 0 ? 0 : remain;
   }
 
   get sugarUsageInPercentage() {
-    return percent(this.getCurrentUsage(), this.limitPerWeek);
+    return percent(this.currentUsage, this.limitPerWeek);
   }
 
-  getCurrentUsage() {
+  get currentUsage() {
+    if (!this.usages.length) {
+      return 0;
+    }
+
     return sum(...this.usages.map((usage) => usage.amount));
   }
 
@@ -77,7 +83,7 @@ export class SugarUsageService {
     await this.#storage.set(key, this.usages).catch(console.error);
 
     if (this.#onChangeCallback) {
-      this.#onChangeCallback(this.getCurrentUsage(), this);
+      this.#onChangeCallback(this.currentUsage, this);
     }
   }
 
@@ -103,5 +109,15 @@ export class SugarUsageService {
     await this.changed();
 
     return true;
+  }
+
+  get remainingUsagePerDay() {
+    const remainingDays = getRemainingDaysInWeek();
+
+    if (!this.remainingUsage) {
+      return 0;
+    }
+
+    return this.remainingUsage / remainingDays;
   }
 }
