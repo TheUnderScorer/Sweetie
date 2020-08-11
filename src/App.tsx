@@ -1,10 +1,12 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { NativeModules, StatusBar } from 'react-native';
-import { AppProviders } from './providers/AppProviders';
+import { AppProviders } from './app/providers/AppProviders';
 import { AppRoutes } from './routes/AppRoutes';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SugarUsage } from './app/sugarUsage/SugarUsage';
+import { DetailsIcon } from './ui/atoms/detailsIcon/DetailsIcon';
+import { UsageList } from './app/usageList/UsageList';
 
 const { UIManager } = NativeModules;
 
@@ -21,11 +23,14 @@ const App = () => {
         <Stack.Navigator initialRouteName={AppRoutes.Home}>
           <Stack.Screen
             options={{
-              title: 'Sweetie',
+              title: '',
+              headerTransparent: true,
+              headerLeft: () => <DetailsIcon />,
             }}
             component={SugarUsage}
             name={AppRoutes.Home}
           />
+          <Stack.Screen name={AppRoutes.Details} component={UsageList} />
         </Stack.Navigator>
       </AppProviders>
     </>

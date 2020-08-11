@@ -1,12 +1,11 @@
 import React, { FC, useMemo } from 'react';
 import { CenteredSafeArea } from '../../ui/atoms/styles/view';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { IconButton, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import { StyleSheet, useWindowDimensions } from 'react-native';
-import { useSugarUsage } from '../hooks/useSugarUsage';
 import { AddSugarUsage } from '../addSugarUsageBtn/AddSugarUsage';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { SugarUsageDetails } from './sugarUsageDetails/SugarUsageDetails';
+import { useSugarUsageContext } from '../providers/SugarUsageProvider';
 
 export interface SugarUsageProps {}
 
@@ -30,9 +29,7 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
     sugarUsage,
     unit,
     remainingUsage,
-    addUsage,
-    reset,
-  } = useSugarUsage();
+  } = useSugarUsageContext();
 
   return (
     <CenteredSafeArea>
@@ -50,11 +47,7 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
           />
         )}
       </AnimatedCircularProgress>
-      <AddSugarUsage onAdd={addUsage} style={styles.addSugarBtn} />
-      <IconButton
-        onPress={reset}
-        icon={(props) => <MaterialIcon {...props} name="refresh" />}
-      />
+      <AddSugarUsage style={styles.addSugarBtn} />
     </CenteredSafeArea>
   );
 };

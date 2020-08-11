@@ -11,10 +11,10 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import useBooleanToggle from '../../hooks/useBooleanToggle';
 import { useNumericField } from '../../hooks/useNumericField';
+import { useSugarUsageContext } from '../providers/SugarUsageProvider';
 
 export interface AddSugarUsageProps {
   style?: StyleProp<ViewStyle>;
-  onAdd: (usage: number) => any;
 }
 
 const styles = StyleSheet.create({
@@ -23,19 +23,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style, onAdd }) => {
+export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style }) => {
   const theme = useTheme();
+
+  const { addUsage } = useSugarUsageContext();
 
   const [amount, handleAmountChange, setAmount] = useNumericField(0);
   const [visible, toggleVisible] = useBooleanToggle(false);
 
-  const handleAdd = useCallback(() => {
+  const handleAdd = useCallback(async () => {
     if (amount) {
-      onAdd(amount as number);
+      await addUsage(amount);
     }
 
     toggleVisible();
-  }, [amount, toggleVisible, onAdd]);
+  }, [amount, toggleVisible, addUsage]);
 
   useEffect(() => {
     if (!visible) {
@@ -46,7 +48,7 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style, onAdd }) => {
   return (
     <View style={style}>
       <IconButton
-        size={40}
+        size={50}
         style={{
           backgroundColor: theme.colors.primary,
           ...(style as object),

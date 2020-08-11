@@ -1,5 +1,5 @@
 import React, { createContext, FC, useContext, useMemo } from 'react';
-import { AsyncStore } from '../storage/AsyncStore';
+import { AsyncStore } from '../../storage/AsyncStore';
 
 const defaultValue: AsyncStorageContextType = {
   storage: new AsyncStore(),

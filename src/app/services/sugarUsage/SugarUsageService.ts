@@ -17,6 +17,8 @@ export class SugarUsageService {
 
   #onChangeCallback?: OnChangeCallback;
 
+  #lastRemoved: (SugarUsage & { index: number }) | null = null;
+
   usages: SugarUsage[] = [];
 
   readonly unit = 'g';
@@ -77,5 +79,29 @@ export class SugarUsageService {
     if (this.#onChangeCallback) {
       this.#onChangeCallback(this.getCurrentUsage(), this);
     }
+  }
+
+  async removeUsage(index: number) {
+    this.#lastRemoved = {
+      ...this.usages[index],
+      index,
+    };
+
+    this.usages.splice(index, 1);
+
+    await this.changed();
+  }
+
+  async restoreLastItem() {
+    if (!this.#lastRemoved) {
+      return false;
+    }
+
+    const { index, ...item } = this.#lastRemoved;
+    this.usages.splice(index, 0, item);
+
+    await this.changed();
+
+    return true;
   }
 }
