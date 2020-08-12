@@ -9,6 +9,7 @@ import React, {
 import { useAsyncStorageContext } from './AsyncStorageProvider';
 import { SugarUsage } from '../services/sugarUsage/types';
 import { SugarUsageService } from '../services/sugarUsage/SugarUsageService';
+import { useOnEndOfWeek } from '../../hooks/useOnEndOfWeek';
 
 const defaultValue: SugarUsageContextType = {
   addUsage(): Promise<void> {
@@ -79,6 +80,15 @@ const SugarUsageProvider: FC = ({ children }) => {
       }),
     [storage, setUsages],
   );
+
+  const reset = useCallback(async () => {
+    await service.reset();
+  }, [service]);
+
+  useOnEndOfWeek({
+    id: 'sugarUsageCleanup',
+    callback: reset,
+  });
 
   const providerValue = useMemo<SugarUsageContextType>(
     () => ({
