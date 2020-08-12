@@ -1,7 +1,5 @@
 import React from 'react';
-import App from '../src/App';
-
-// Note: test renderer must be required after react-native.
+import App from './App';
 import { render } from '@testing-library/react-native';
 
 it('renders correctly', () => {

@@ -4,14 +4,32 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "build:android": "cd android && ./gradlew assembleRelease",
+    "build:ios": "sh ./scripts/build-ios.sh",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "test:ci": "jest --ci --forceExit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.7.3",
+    "@react-navigation/stack": "^5.9.0",
+    "moment": "^2.27.0",
     "react": "16.13.1",
-    "react-native": "0.63.2"
+    "react-native": "0.63.2",
+    "react-native-circular-progress": "^1.3.6",
+    "react-native-gesture-handler": "^1.7.0",
+    "react-native-paper": "^4.0.1",
+    "react-native-reanimated": "^1.10.2",
+    "react-native-safe-area-context": "^3.1.4",
+    "react-native-screens": "^2.10.1",
+    "react-native-svg": "^12.1.0",
+    "react-native-vector-icons": "^7.0.0",
+    "recoil": "0.0.10",
+    "styled-components": "^5.1.1"
   },
   "repository": {
     "type": "git",
@@ -29,7 +47,10 @@
     "@testing-library/react-native": "^7.0.1",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
+    "@types/react-native-vector-icons": "^6.4.5",
     "@types/react-test-renderer": "^16.9.2",
+    "@types/recoil": "0.0.1",
+    "@types/styled-components": "^5.1.2",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "babel-jest": "^25.1.0",
@@ -47,8 +68,12 @@
       "@testing-library/jest-native/extend-expect"
     ],
     "setupFiles": [
-      "<rootDir>/src/setupTests.ts"
+      "<rootDir>/src/setupTests.ts",
+      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
     ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/fileMock.js"
+    },
     "moduleFileExtensions": [
       "ts",
       "tsx",
