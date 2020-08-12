@@ -25,9 +25,9 @@ export const UsageListItem: FC<UsageListItemProps> = ({
         <Avatar.Icon
           size={50}
           {...props}
-          icon={(props) => (
+          icon={(iconProps) => (
             <MaterialCommunityIcon
-              {...props}
+              {...iconProps}
               color={Colors.white}
               name="spoon-sugar"
             />

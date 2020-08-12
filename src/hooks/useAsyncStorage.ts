@@ -28,8 +28,8 @@ export const useAsyncStorage = <T>(key: string): AsyncStorageHookResult<T> => {
   }, [key, storage]);
 
   const set = useCallback(
-    async (setValue: AsyncStorageValue<T>) => {
-      await storage.set(key, setValue);
+    async (newValue: AsyncStorageValue<T>) => {
+      await storage.set(key, newValue);
     },
     [key, storage],
   );

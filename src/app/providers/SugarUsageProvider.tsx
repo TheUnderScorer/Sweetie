@@ -78,7 +78,7 @@ const SugarUsageProvider: FC = ({ children }) => {
         storage,
         onChange,
       }),
-    [storage, setUsages],
+    [storage, onChange],
   );
 
   const reset = useCallback(async () => {

@@ -1,12 +1,6 @@
 import React, { FC, useCallback, useMemo } from 'react';
 import { SugarImg } from './sugarImg/SugarImg';
-import {
-  IconButton,
-  Subheading,
-  Title,
-  Divider,
-  useTheme,
-} from 'react-native-paper';
+import { IconButton, Subheading, Title, useTheme } from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { LayoutAnimation, StyleSheet, View } from 'react-native';
 import useBooleanToggle from '../../../hooks/useBooleanToggle';
