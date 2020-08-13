@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useAsyncStorageContext } from '../app/providers/AsyncStorageProvider';
-import { AsyncStorageValue } from '../storage/AsyncStore';
+import { useAsyncStorageContext } from 'app/providers/AsyncStorageProvider';
+import { AsyncStorageValue } from 'storage/AsyncStore';
 import isEqual from 'lodash.isequal';
 
 type AsyncStorageHookResult<T> = {

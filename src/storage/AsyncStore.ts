@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { tryParseJson } from '../utils/json';
+import { tryParseJson } from 'utils/json';
 
 type OnChange<T> = (value: AsyncStorageValue<T>, key: string) => any;
 

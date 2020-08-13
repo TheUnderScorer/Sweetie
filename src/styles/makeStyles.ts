@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from 'react-native-paper/src/types';
-import { useThemeContext } from '../app/providers/ThemeProvider';
+import { useThemeContext } from 'app/providers/ThemeProvider';
 import { useMemo } from 'react';
 
 type StylesCreator<

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useThemeContext } from '../../../app/providers/ThemeProvider';
+import { useThemeContext } from 'app/providers/ThemeProvider';
 import { Switch } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
