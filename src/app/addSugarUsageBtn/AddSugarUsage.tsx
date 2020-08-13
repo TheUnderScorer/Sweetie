@@ -48,14 +48,14 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style }) => {
   return (
     <View style={style}>
       <IconButton
-        size={50}
+        size={45}
         style={{
           backgroundColor: theme.colors.primary,
           ...(style as object),
         }}
         color="white"
         onPress={toggleVisible}
-        icon={(props) => <MaterialIcon {...props} name="add" />}
+        icon={(props) => <MaterialIcon {...props} size={35} name="add" />}
       />
       <Portal>
         <Dialog visible={visible} onDismiss={toggleVisible}>
