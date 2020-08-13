@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import { SugarUsage } from '../../services/sugarUsage/types';
+import { SugarUsage } from '../../../services/sugarUsage/types';
 import { Avatar, Colors, IconButton, List, useTheme } from 'react-native-paper';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';

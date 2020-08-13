@@ -7,9 +7,9 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
-import { SugarUsage } from './app/sugarUsage/SugarUsage';
+import { SugarUsage } from './app/screens/sugarUsage/SugarUsage';
 import { DetailsIcon } from './ui/atoms/detailsIcon/DetailsIcon';
-import { UsageList } from './app/usageList/UsageList';
+import { UsageList } from './app/screens/usageList/UsageList';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
 

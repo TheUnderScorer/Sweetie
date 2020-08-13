@@ -9,9 +9,9 @@ import {
 } from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import useBooleanToggle from '../../hooks/useBooleanToggle';
-import { useNumericField } from '../../hooks/useNumericField';
-import { useSugarUsageContext } from '../providers/SugarUsageProvider';
+import useBooleanToggle from '../../../hooks/useBooleanToggle';
+import { useNumericField } from '../../../hooks/useNumericField';
+import { useSugarUsageContext } from '../../../app/providers/SugarUsageProvider';
 
 export interface AddSugarUsageProps {
   style?: StyleProp<ViewStyle>;
