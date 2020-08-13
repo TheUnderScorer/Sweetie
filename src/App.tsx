@@ -3,7 +3,10 @@ import 'react-native-gesture-handler';
 import { NativeModules, StatusBar, YellowBox } from 'react-native';
 import { AppProviders } from './app/providers/AppProviders';
 import { AppRoutes } from './routes/AppRoutes';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 import { SugarUsage } from './app/sugarUsage/SugarUsage';
 import { DetailsIcon } from './ui/atoms/detailsIcon/DetailsIcon';
 import { UsageList } from './app/usageList/UsageList';
@@ -22,7 +25,11 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <AppProviders>
-        <Stack.Navigator initialRouteName={AppRoutes.Home}>
+        <Stack.Navigator
+          screenOptions={{
+            ...TransitionPresets.SlideFromRightIOS,
+          }}
+          initialRouteName={AppRoutes.Home}>
           <Stack.Screen
             options={{
               title: '',
