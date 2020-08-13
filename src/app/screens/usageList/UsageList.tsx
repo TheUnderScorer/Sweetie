@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react';
-import { Colors, Portal, Snackbar, Title } from 'react-native-paper';
-import { CenteredSafeArea } from '../../../ui/atoms/styles/view';
+import { Colors, Portal, Snackbar, Title, useTheme } from 'react-native-paper';
+import { CenteredSurface } from '../../../ui/atoms/styles/view';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { UsageListItem } from './usageListItem/UsageListItem';
 import { useSugarUsageContext } from '../../providers/SugarUsageProvider';
@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  centered: {
-    marginBottom: 40,
+  safeAreaView: {
+    flex: 1,
   },
   addBtn: {
     marginTop: 10,
@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
 export const UsageList: FC<UsageListProps> = () => {
   const { usages, unit, removeUsage, restoreLastItem } = useSugarUsageContext();
   const [removed, toggleRemoved, setRemoved] = useBooleanToggle(false);
+
+  const theme = useTheme();
 
   const handleRemove = useCallback(
     (index: number) => async () => {
@@ -47,7 +49,7 @@ export const UsageList: FC<UsageListProps> = () => {
 
   if (!usages.length) {
     return (
-      <CenteredSafeArea style={styles.centered}>
+      <CenteredSurface>
         <Title>No sugar usage in this week! 👍🏻</Title>
         <AddSugarUsage
           style={styles.addBtn}
@@ -56,12 +58,13 @@ export const UsageList: FC<UsageListProps> = () => {
           isUnmountedOnAdd
         />
         {snackbar}
-      </CenteredSafeArea>
+      </CenteredSurface>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.colors.surface }]}>
       <Portal>{snackbar}</Portal>
       <ScrollView>
         {usages.map((usage, index) => (

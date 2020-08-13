@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Surface } from 'react-native-paper';
 
 export const CenteredView = styled.View`
   flex: 1;
@@ -29,4 +30,10 @@ export const CenteredSafeAreaRow = styled.SafeAreaView`
 
 export const RowView = styled.View`
   flex-direction: row;
+`;
+
+export const CenteredSurface = styled(Surface)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 `;
