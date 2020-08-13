@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     justifyContent: 'space-between',
-    paddingTop: 60,
+    marginTop: '25%',
     paddingBottom: 20,
   },
 });

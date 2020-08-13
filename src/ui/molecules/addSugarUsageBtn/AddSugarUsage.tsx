@@ -15,15 +15,26 @@ import { useSugarUsageContext } from '../../../app/providers/SugarUsageProvider'
 
 export interface AddSugarUsageProps {
   style?: StyleProp<ViewStyle>;
+  isUnmountedOnAdd?: boolean;
+  mode?: 'icon' | 'text';
+  text?: string;
 }
 
 const styles = StyleSheet.create({
   cancel: {
     marginRight: 10,
   },
+  button: {
+    paddingVertical: 4,
+  },
 });
 
-export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style }) => {
+export const AddSugarUsage: FC<AddSugarUsageProps> = ({
+  style,
+  isUnmountedOnAdd,
+  mode = 'icon',
+  text = 'Add usage',
+}) => {
   const theme = useTheme();
 
   const { addUsage } = useSugarUsageContext();
@@ -36,8 +47,10 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style }) => {
       await addUsage(amount);
     }
 
-    toggleVisible();
-  }, [amount, toggleVisible, addUsage]);
+    if (!isUnmountedOnAdd) {
+      toggleVisible();
+    }
+  }, [amount, toggleVisible, addUsage, isUnmountedOnAdd]);
 
   useEffect(() => {
     if (!visible) {
@@ -47,17 +60,30 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style }) => {
 
   return (
     <View style={style}>
-      <IconButton
-        testID="add-sugar-usage"
-        size={45}
-        style={{
-          backgroundColor: theme.colors.primary,
-          ...(style as object),
-        }}
-        color="white"
-        onPress={toggleVisible}
-        icon={(props) => <MaterialIcon {...props} size={35} name="add" />}
-      />
+      {mode === 'icon' && (
+        <IconButton
+          testID="add-sugar-usage"
+          size={45}
+          style={{
+            backgroundColor: theme.colors.primary,
+            ...(style as object),
+          }}
+          color="white"
+          onPress={toggleVisible}
+          icon={(props) => <MaterialIcon {...props} size={35} name="add" />}
+        />
+      )}
+      {mode === 'text' && (
+        <Button
+          style={styles.button}
+          loading={visible}
+          icon={(props) => <MaterialIcon {...props} size={35} name="add" />}
+          testID="add-sugar-usage"
+          onPress={toggleVisible}
+          mode="contained">
+          {text}
+        </Button>
+      )}
       <Portal>
         <Dialog visible={visible} onDismiss={toggleVisible}>
           <Dialog.Title>Add sugar usage</Dialog.Title>
