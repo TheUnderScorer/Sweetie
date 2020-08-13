@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/TheUnderScorer/Sweetie/compare/v1.0.0...v1.1.0) (2020-08-13)
+
+
+### Features
+
+* Add app icon ([f0d0680](https://github.com/TheUnderScorer/Sweetie/commit/f0d0680e52c23100fc7dc120fbe20e2bc8cb1f67))
+* Rename app to "Sweetie" ([07daf47](https://github.com/TheUnderScorer/Sweetie/commit/07daf475ee565592f06407c067e7309427158338))
+* UI improvements ([844378a](https://github.com/TheUnderScorer/Sweetie/commit/844378a0cc9d73862c18b5fe96743eedbee9da24))
+
 # 1.0.0 (2020-08-12)
 
 
