@@ -67,9 +67,6 @@ describe('Sugar usage screen', () => {
     const remainingUsage = await cmp.findByTestId('remaining-usage');
     expect(remainingUsage).toHaveTextContent('75g');
 
-    const leftPerday = await cmp.findByTestId('left-per-day');
-    expect(leftPerday).toHaveTextContent('75.00g');
-
     const remainingDays = await cmp.findByTestId('remaining-days');
     expect(remainingDays).toHaveTextContent('1');
   });
