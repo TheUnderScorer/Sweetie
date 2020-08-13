@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useAsyncStorage } from './useAsyncStorage';
-import { getEndOfWeek, isEndOfWeek, schedule } from '../utils/date';
-import { DateFormats } from '../types/date';
+import { getEndOfWeek, isEndOfWeek, schedule } from 'utils/date';
+import { DateFormats } from 'types/date';
 import moment from 'moment';
 
 interface EndOfWeekHookProps {

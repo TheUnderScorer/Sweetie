@@ -9,7 +9,7 @@ import React, {
 import { useAsyncStorageContext } from './AsyncStorageProvider';
 import { SugarUsage } from '../services/sugarUsage/types';
 import { SugarUsageService } from '../services/sugarUsage/SugarUsageService';
-import { useOnEndOfWeek } from '../../hooks/useOnEndOfWeek';
+import { useOnEndOfWeek } from 'hooks/useOnEndOfWeek';
 
 const defaultValue: SugarUsageContextType = {
   addUsage(): Promise<void> {

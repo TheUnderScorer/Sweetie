@@ -3,8 +3,8 @@ import { SugarImg } from './sugarImg/SugarImg';
 import { IconButton, Subheading, Title, useTheme } from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { LayoutAnimation, StyleSheet, View } from 'react-native';
-import useBooleanToggle from '../../../../hooks/useBooleanToggle';
-import { getRemainingDaysInWeek } from '../../../../utils/date';
+import useBooleanToggle from 'hooks/useBooleanToggle';
+import { getRemainingDaysInWeek } from 'utils/date';
 
 export interface SugarUsageDetailsProps {
   sugarUsage: number;

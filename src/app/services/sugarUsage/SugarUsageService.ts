@@ -1,7 +1,7 @@
-import { percent, sum } from '../../../utils/math';
-import { AsyncStore } from '../../../storage/AsyncStore';
+import { percent, sum } from 'utils/math';
+import { AsyncStore } from 'storage/AsyncStore';
 import { SugarUsage } from './types';
-import { getRemainingDaysInWeek } from '../../../utils/date';
+import { getRemainingDaysInWeek } from 'utils/date';
 
 export const storageKey = 'sugarUsages';
 

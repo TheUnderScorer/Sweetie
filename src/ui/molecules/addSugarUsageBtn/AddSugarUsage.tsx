@@ -5,13 +5,13 @@ import {
   IconButton,
   Portal,
   TextInput,
-  useTheme,
 } from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import useBooleanToggle from '../../../hooks/useBooleanToggle';
-import { useNumericField } from '../../../hooks/useNumericField';
-import { useSugarUsageContext } from '../../../app/providers/SugarUsageProvider';
+import { StyleProp, View, ViewStyle } from 'react-native';
+import useBooleanToggle from 'hooks/useBooleanToggle';
+import { useNumericField } from 'hooks/useNumericField';
+import { useSugarUsageContext } from 'app/providers/SugarUsageProvider';
+import { makeStyles } from 'styles/makeStyles';
 
 export interface AddSugarUsageProps {
   style?: StyleProp<ViewStyle>;
@@ -20,14 +20,17 @@ export interface AddSugarUsageProps {
   text?: string;
 }
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme) => ({
   cancel: {
     marginRight: 10,
   },
   button: {
     paddingVertical: 4,
   },
-});
+  iconBtn: {
+    backgroundColor: theme.colors.primary,
+  },
+}));
 
 export const AddSugarUsage: FC<AddSugarUsageProps> = ({
   style,
@@ -35,7 +38,7 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({
   mode = 'icon',
   text = 'Add usage',
 }) => {
-  const theme = useTheme();
+  const styles = useStyles();
 
   const { addUsage } = useSugarUsageContext();
 
@@ -64,10 +67,7 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({
         <IconButton
           testID="add-sugar-usage"
           size={45}
-          style={{
-            backgroundColor: theme.colors.primary,
-            ...(style as object),
-          }}
+          style={[styles.iconBtn, style]}
           color="white"
           onPress={toggleVisible}
           icon={(props) => <MaterialIcon {...props} size={35} name="add" />}
