@@ -48,6 +48,7 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style }) => {
   return (
     <View style={style}>
       <IconButton
+        testID="add-sugar-usage"
         size={45}
         style={{
           backgroundColor: theme.colors.primary,
@@ -62,6 +63,7 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style }) => {
           <Dialog.Title>Add sugar usage</Dialog.Title>
           <Dialog.Content>
             <TextInput
+              testID="sugar-usage-value"
               right={<TextInput.Affix text="g" />}
               value={amount?.toString()}
               onChangeText={handleAmountChange}
@@ -72,7 +74,11 @@ export const AddSugarUsage: FC<AddSugarUsageProps> = ({ style }) => {
             <Button style={styles.cancel} onPress={toggleVisible}>
               Cancel
             </Button>
-            <Button onPress={handleAdd} disabled={!amount} mode="contained">
+            <Button
+              testID="save-usage"
+              onPress={handleAdd}
+              disabled={!amount}
+              mode="contained">
               Save
             </Button>
           </Dialog.Actions>

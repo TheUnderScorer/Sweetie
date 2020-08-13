@@ -3,7 +3,7 @@ import { AsyncStore } from '../../../storage/AsyncStore';
 import { SugarUsage } from './types';
 import { getRemainingDaysInWeek } from '../../../utils/date';
 
-const key = 'sugarUsages1';
+export const storageKey = 'sugarUsages';
 
 export interface SugarServiceProps {
   limitPerWeek: number;
@@ -31,7 +31,7 @@ export class SugarUsageService {
     this.#storage = storage;
     this.#onChangeCallback = onChange;
 
-    storage.get<SugarUsage[]>(key).then(async (result) => {
+    storage.get<SugarUsage[]>(storageKey).then(async (result) => {
       this.usages = result ?? [];
 
       await this.changed();
@@ -80,7 +80,7 @@ export class SugarUsageService {
   }
 
   private async changed() {
-    await this.#storage.set(key, this.usages).catch(console.error);
+    await this.#storage.set(storageKey, this.usages).catch(console.error);
 
     if (this.#onChangeCallback) {
       this.#onChangeCallback(this.currentUsage, this);
