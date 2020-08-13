@@ -70,7 +70,7 @@ export const SugarUsageDetails: FC<SugarUsageDetailsProps> = ({
           </Subheading>
 
           <Subheading style={styles.text}>
-            Left per day: {sugarUsagePerDay.toLocaleString()}
+            Left per day: {sugarUsagePerDay.toFixed(2)}
             {unit}
           </Subheading>
           <Subheading style={styles.text}>
