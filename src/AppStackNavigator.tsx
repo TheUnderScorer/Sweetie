@@ -9,7 +9,6 @@ import { UsageList } from './app/screens/usageList/UsageList';
 import { AppRoutes } from './routes/AppRoutes';
 import { useTheme } from 'react-native-paper';
 import { DarkModeSwitch } from './ui/molecules/darkModeSwitch/DarkModeSwitch';
-import { Text } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createStackNavigator();
