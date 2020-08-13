@@ -1,10 +1,10 @@
 import React, { FC, useCallback } from 'react';
 import { Colors, Portal, Snackbar, Title } from 'react-native-paper';
-import { CenteredSafeArea } from '../../ui/atoms/styles/view';
+import { CenteredSafeArea } from '../../../ui/atoms/styles/view';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { UsageListItem } from './usageListItem/UsageListItem';
-import { useSugarUsageContext } from '../providers/SugarUsageProvider';
-import useBooleanToggle from '../../hooks/useBooleanToggle';
+import { useSugarUsageContext } from '../../providers/SugarUsageProvider';
+import useBooleanToggle from '../../../hooks/useBooleanToggle';
 
 export interface UsageListProps {}
 

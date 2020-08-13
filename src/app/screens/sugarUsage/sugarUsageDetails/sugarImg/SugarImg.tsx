@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import Sugar from '../../../../assets/sugar.png';
+import Sugar from '../../../../../assets/sugar.png';
 
 export interface SugarImgProps {}
 

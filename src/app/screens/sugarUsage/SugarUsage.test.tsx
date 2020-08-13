@@ -2,13 +2,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {
   storageKey,
   SugarUsageService,
-} from '../services/sugarUsage/SugarUsageService';
+} from '../../services/sugarUsage/SugarUsageService';
 import { act, fireEvent, render } from '@testing-library/react-native';
-import { AppProviders } from '../providers/AppProviders';
+import { AppProviders } from '../../providers/AppProviders';
 import React from 'react';
 import { SugarUsage } from './SugarUsage';
-import { SugarUsage as SugarUsageType } from '../services/sugarUsage/types';
-import { wait } from '../../utils/wait';
+import { SugarUsage as SugarUsageType } from '../../services/sugarUsage/types';
+import { wait } from '../../../utils/wait';
 
 const usages: SugarUsageType[] = [
   {
