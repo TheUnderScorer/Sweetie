@@ -1,6 +1,6 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import { NativeModules, StatusBar, YellowBox } from 'react-native';
+import { NativeModules, YellowBox } from 'react-native';
 import { AppProviders } from './app/providers/AppProviders';
 import { AppRoutes } from './routes/AppRoutes';
 import {
@@ -23,7 +23,6 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
       <AppProviders>
         <Stack.Navigator
           screenOptions={{

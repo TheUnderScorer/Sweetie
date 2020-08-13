@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { CenteredSafeArea } from '../../ui/atoms/styles/view';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Surface, useTheme } from 'react-native-paper';
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { StatusBar, StyleSheet, useWindowDimensions } from 'react-native';
 import { AddSugarUsage } from '../addSugarUsageBtn/AddSugarUsage';
 import { SugarUsageDetails } from './sugarUsageDetails/SugarUsageDetails';
 import { useSugarUsageContext } from '../providers/SugarUsageProvider';
@@ -10,11 +10,13 @@ import { useSugarUsageContext } from '../providers/SugarUsageProvider';
 export interface SugarUsageProps {}
 
 const styles = StyleSheet.create({
-  addSugarBtn: {
-    marginTop: 50,
-  },
   container: {
     flex: 1,
+  },
+  safeArea: {
+    justifyContent: 'space-between',
+    paddingTop: 60,
+    paddingBottom: 20,
   },
 });
 
@@ -35,7 +37,8 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
 
   return (
     <Surface style={styles.container}>
-      <CenteredSafeArea>
+      <StatusBar barStyle="light-content" />
+      <CenteredSafeArea style={styles.safeArea}>
         <AnimatedCircularProgress
           fill={percentUsage}
           size={size}
@@ -51,7 +54,7 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
             />
           )}
         </AnimatedCircularProgress>
-        <AddSugarUsage style={styles.addSugarBtn} />
+        <AddSugarUsage />
       </CenteredSafeArea>
     </Surface>
   );
