@@ -1,12 +1,14 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import { NativeModules, StatusBar } from 'react-native';
+import { NativeModules, StatusBar, YellowBox } from 'react-native';
 import { AppProviders } from './app/providers/AppProviders';
 import { AppRoutes } from './routes/AppRoutes';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SugarUsage } from './app/sugarUsage/SugarUsage';
 import { DetailsIcon } from './ui/atoms/detailsIcon/DetailsIcon';
 import { UsageList } from './app/usageList/UsageList';
+
+YellowBox.ignoreWarnings(['Setting a timer']);
 
 const { UIManager } = NativeModules;
 
