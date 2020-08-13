@@ -5,6 +5,7 @@ import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { UsageListItem } from './usageListItem/UsageListItem';
 import { useSugarUsageContext } from '../../providers/SugarUsageProvider';
 import useBooleanToggle from '../../../hooks/useBooleanToggle';
+import { AddSugarUsage } from '../../../ui/molecules/addSugarUsageBtn/AddSugarUsage';
 
 export interface UsageListProps {}
 
@@ -14,6 +15,9 @@ const styles = StyleSheet.create({
   },
   centered: {
     marginBottom: 40,
+  },
+  addBtn: {
+    marginTop: 10,
   },
 });
 
@@ -45,6 +49,12 @@ export const UsageList: FC<UsageListProps> = () => {
     return (
       <CenteredSafeArea style={styles.centered}>
         <Title>No sugar usage in this week! 👍🏻</Title>
+        <AddSugarUsage
+          style={styles.addBtn}
+          text="Add first usage"
+          mode="text"
+          isUnmountedOnAdd
+        />
         {snackbar}
       </CenteredSafeArea>
     );
