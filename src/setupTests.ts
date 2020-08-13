@@ -1,4 +1,6 @@
 import 'react-native';
+import '@testing-library/jest-native/extend-expect';
+
 // @ts-ignore
 import mockAsyncStorage from '@react-native-community/async-storage/jest/async-storage-mock';
 
@@ -38,3 +40,7 @@ jest.mock('react-native-gesture-handler', () => {
     Directions: {},
   };
 });
+
+jest.mock(
+  '../node_modules/react-native/Libraries/LayoutAnimation/LayoutAnimation.js',
+);

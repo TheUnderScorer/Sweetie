@@ -50,13 +50,14 @@ export const SugarUsageDetails: FC<SugarUsageDetailsProps> = ({
   }, [toggleViewDetails]);
 
   return (
-    <View style={styles.detailsContainer}>
+    <View testID="sugar-details" style={styles.detailsContainer}>
       {!viewDetails && <SugarImg />}
       {viewDetails && (
         <>
-          <Title style={styles.text}>
+          <Title testID="current-usage" style={styles.text}>
             Current usage:{' '}
             <Title
+              testID="current-usage-value"
               style={{
                 color: remainingUsage ? theme.colors.text : theme.colors.error,
               }}>
@@ -64,21 +65,21 @@ export const SugarUsageDetails: FC<SugarUsageDetailsProps> = ({
               {unit}
             </Title>
           </Title>
-          <Subheading style={styles.text}>
+          <Subheading testID="remaining-usage" style={styles.text}>
             Left: {remainingUsage}
             {unit}
           </Subheading>
-
-          <Subheading style={styles.text}>
+          <Subheading testID="left-per-day" style={styles.text}>
             Left per day: {sugarUsagePerDay.toFixed(2)}
             {unit}
           </Subheading>
-          <Subheading style={styles.text}>
+          <Subheading testID="remaining-days" style={styles.text}>
             Remaining days: {remainingDays}
           </Subheading>
         </>
       )}
       <IconButton
+        testID="toggle-details"
         style={styles.toggleIcon}
         onPress={handleToggle}
         size={45}

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAsyncStorageContext } from '../app/providers/AsyncStorageProvider';
 import { AsyncStorageValue } from '../storage/AsyncStore';
+import isEqual from 'lodash.isequal';
 
 type AsyncStorageHookResult<T> = {
   value: AsyncStorageValue<T>;
@@ -15,7 +16,7 @@ export const useAsyncStorage = <T>(key: string): AsyncStorageHookResult<T> => {
 
   useEffect(() => {
     const unsubscribe = storage.subscribe((changedValue, changedKey) => {
-      if (changedKey !== key) {
+      if (changedKey !== key || isEqual(changedValue, value)) {
         return;
       }
 
@@ -25,7 +26,7 @@ export const useAsyncStorage = <T>(key: string): AsyncStorageHookResult<T> => {
     return () => {
       unsubscribe();
     };
-  }, [key, storage]);
+  }, [key, storage, value]);
 
   const set = useCallback(
     async (newValue: AsyncStorageValue<T>) => {

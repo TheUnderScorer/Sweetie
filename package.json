@@ -18,6 +18,7 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
+    "lodash.isequal": "^4.5.0",
     "moment": "^2.27.0",
     "react": "16.13.1",
     "react-native": "0.63.2",
@@ -47,6 +48,7 @@
     "@testing-library/jest-native": "^3.1.0",
     "@testing-library/react-native": "^7.0.1",
     "@types/jest": "^25.2.3",
+    "@types/lodash.isequal": "^4.5.5",
     "@types/react-native": "^0.63.2",
     "@types/react-native-vector-icons": "^6.4.5",
     "@types/react-test-renderer": "^16.9.2",
@@ -66,9 +68,6 @@
   "jest": {
     "preset": "react-native",
     "setupFilesAfterEnv": [
-      "@testing-library/jest-native/extend-expect"
-    ],
-    "setupFiles": [
       "<rootDir>/src/setupTests.ts",
       "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
     ],
