@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/TheUnderScorer/Sweetie/compare/v1.1.0...v1.2.0) (2020-08-13)
+
+
+### Features
+
+* Add dark mode ([9615b9b](https://github.com/TheUnderScorer/Sweetie/commit/9615b9be7b15de4df34980ed092be5057ba43486))
+* Add sugar usage from empty list ([f647b67](https://github.com/TheUnderScorer/Sweetie/commit/f647b67832d8d904ff39dd2b578d304477f63eed))
+
 # [1.1.0](https://github.com/TheUnderScorer/Sweetie/compare/v1.0.0...v1.1.0) (2020-08-13)
 
 
