@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSugarUsageContext } from 'app/providers/SugarUsageProvider';
-import { SweetieMood } from './types';
+import { SweetieMood, SweetieMoodResult } from './types';
 import { moodPercentMap } from './moodPercentMap';
+import { moodImageMap } from 'app/hooks/useSweetieMood/moodImageMap';
+import { moodFeelMap } from 'app/hooks/useSweetieMood/moodFeelMap';
 
-export const useSweetieMood = () => {
+export const useSweetieMood = (): SweetieMoodResult => {
   const { percentUsage } = useSugarUsageContext();
   const [mood, setMood] = useState<SweetieMood>(SweetieMood.Neutral);
 
@@ -17,5 +19,12 @@ export const useSweetieMood = () => {
     }
   }, [percentUsage]);
 
-  return mood;
+  return useMemo(
+    () => ({
+      mood,
+      image: moodImageMap[mood],
+      feel: moodFeelMap[mood],
+    }),
+    [mood],
+  );
 };

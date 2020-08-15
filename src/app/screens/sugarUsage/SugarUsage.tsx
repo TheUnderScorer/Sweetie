@@ -1,11 +1,12 @@
 import React, { FC, useMemo } from 'react';
 import { CenteredSafeArea } from 'ui/atoms/styles/view';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { Surface, useTheme } from 'react-native-paper';
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { Surface, useTheme, Headline, Subheading } from 'react-native-paper';
+import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import { AddSugarUsage } from 'ui/molecules/addSugarUsageBtn/AddSugarUsage';
 import { SugarUsageDetails } from './sugarUsageDetails/SugarUsageDetails';
 import { useSugarUsageContext } from 'app/providers/SugarUsageProvider';
+import { useSweetieMood } from 'app/hooks/useSweetieMood/useSweetieMood';
 
 export interface SugarUsageProps {}
 
@@ -18,6 +19,9 @@ const styles = StyleSheet.create({
     marginTop: '25%',
     paddingBottom: 20,
   },
+  feel: {
+    textAlign: 'center',
+  },
 });
 
 export const SugarUsage: FC<SugarUsageProps> = () => {
@@ -25,6 +29,8 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
 
   const dimensions = useWindowDimensions();
   const size = useMemo(() => dimensions.width / 1.2, [dimensions]);
+
+  const { feel } = useSweetieMood();
 
   const {
     percentUsage,
@@ -53,6 +59,10 @@ export const SugarUsage: FC<SugarUsageProps> = () => {
             />
           )}
         </AnimatedCircularProgress>
+        <View>
+          <Headline style={styles.feel}>{feel.title}</Headline>
+          <Subheading style={styles.feel}>{feel.subTitle}</Subheading>
+        </View>
         <AddSugarUsage />
       </CenteredSafeArea>
     </Surface>
