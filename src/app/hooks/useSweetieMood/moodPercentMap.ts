@@ -10,7 +10,7 @@ export const moodPercentMap: MoodPercentUsageMap[] = [
     condition: (percentUsage) => percentUsage > 20 && percentUsage <= 50,
   },
   {
-    mood: SweetieMood.Puzzled,
+    mood: SweetieMood.Annoyed,
     condition: (percentUsage) => percentUsage > 50 && percentUsage <= 80,
   },
   {
