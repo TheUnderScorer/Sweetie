@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { IconButton } from 'react-native-paper';
-import { AppRoutes } from '../../../routes/AppRoutes';
+import { AppRoutes } from 'routes/AppRoutes';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import useNavigateTo from '../../../hooks/useNavigateTo';
+import useNavigateTo from 'hooks/useNavigateTo';
 
 export interface DetailsIconProps {}
 
