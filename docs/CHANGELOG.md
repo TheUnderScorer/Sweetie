@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/TheUnderScorer/Sweetie/compare/v1.2.0...v1.3.0) (2020-08-15)
+
+
+### Features
+
+* Introduce "Sweetie" whose mood changes depending on sugar usage ([c824de3](https://github.com/TheUnderScorer/Sweetie/commit/c824de3869fdd9504db647498ace4ec87e70ae72))
+
 # [1.2.0](https://github.com/TheUnderScorer/Sweetie/compare/v1.1.0...v1.2.0) (2020-08-13)
 
 
